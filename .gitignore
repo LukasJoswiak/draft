@@ -1,0 +1,6 @@
+# Vim
+*.swp
+*.swo
+
+a.out
+binary
