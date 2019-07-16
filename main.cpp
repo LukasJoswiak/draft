@@ -1,15 +1,18 @@
-#include <ios>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
-#include "Draft.hpp"
+#include "BinaryOutputArchive.hpp"
 
 int main() {
-  Draft d;
-  d.Serialize(1);
+  {
+    std::ofstream stream("out", std::ios::binary);
+    draft::BinaryOutputArchive oa(stream);
 
-  int n = Draft::Deserialize("binary");
-  std::cout << n << std::endl;
+    oa(32);
+
+    // Try running `xxd -b out` on the command line to view the binary
+    // dump of `out`.
+  }
 
   return 0;
 }

@@ -1,2 +1,2 @@
 all:
-	g++ -std=c++17 Draft.cpp main.cpp
+	g++ -std=c++17 BinaryOutputArchive.cpp main.cpp
