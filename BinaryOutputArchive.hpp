@@ -1,6 +1,9 @@
 #include <fstream>
 #include <memory>
 
+#ifndef BINARYOUTPUTARCHIVE_HPP_
+#define BINARYOUTPUTARCHIVE_HPP_
+
 namespace draft {
 
 class BinaryOutputArchive {
@@ -38,3 +41,5 @@ class BinaryOutputArchive {
 };
 
 }  // namespace draft
+
+#endif  // BINARYOUTPUTARCHIVE_HPP_
