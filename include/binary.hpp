@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 #include <memory>
 
 #ifndef BINARYOUTPUTARCHIVE_HPP_
@@ -8,7 +9,7 @@ namespace draft {
 
 class BinaryOutputArchive {
  public:
-  explicit BinaryOutputArchive(std::ostream& ostrm);
+  explicit BinaryOutputArchive(std::ostream& ostrm) : ostrm_(ostrm) {}
 
   // Overload the function call operator. This allows clients to use instances
   // of this class as a function. For example:
@@ -20,7 +21,9 @@ class BinaryOutputArchive {
   }
 
   // Write the given data to the output stream.
-  void SaveToBinary(const void* data, std::size_t size) const;
+  void SaveToBinary(const void* addr, std::size_t size) const {
+    ostrm_.write(reinterpret_cast<const char*>(addr), size);
+  }
 
  private:
   // Process and serialize a single element.
