@@ -8,9 +8,8 @@ int main() {
     std::ofstream stream("out", std::ios::binary);
     draft::BinaryOutputArchive oa(stream);
 
-    oa(32);
-    // oa("hello");
-    // oa(std::string("hi"));
+    std::string str("hello");
+    oa(32, str);
 
     // Try running `xxd -b out` on the command line to view the binary
     // dump of `out`.
@@ -20,9 +19,10 @@ int main() {
     std::ifstream stream("out", std::ios::binary);
     draft::BinaryInputArchive ia(stream);
 
-    int a;
-    ia(a);
-    std::cout << "a = " << a << std::endl;
+    int x;
+    std::string str;
+    ia(x, str);
+    std::cout << x << ", " << str << std::endl;
   }
 
   return 0;
