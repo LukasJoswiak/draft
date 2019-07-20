@@ -1,7 +1,7 @@
-#include "../binary.hpp"
-
 #ifndef STRING_HPP_
 #define STRING_HPP_
+
+#include "../binary_output.hpp"
 
 namespace draft {
 
