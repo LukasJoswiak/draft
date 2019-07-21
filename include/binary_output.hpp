@@ -36,7 +36,7 @@ class BinaryOutputArchive {
     Save(*this, first);
   }
 
-  // Use variadic template to accept an arbitrary number of arguments. This
+  // Use variadic templates to accept an arbitrary number of arguments. This
   // allows the user to pass any number of elements to be serialized.
   template<typename T, typename... ArgTypes>
   void Process(T&& first, ArgTypes&... rest) {

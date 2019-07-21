@@ -1,6 +1,6 @@
-// Strings are encoded by writing their size, followed by string itself.
-// When decoding a string, the size is read in order to resize the string
-// object being read into.
+// Strings are encoded by writing their size, followed by the string itself.
+// When decoding a string, the size is read in first in order to resize the
+// string object being read into.
 //
 // The size of the string is written using std::size_t bytes, which is
 // guaranteed to be large enough to represent the size of any object.
@@ -14,11 +14,14 @@
 
 namespace draft {
 
+// Save the string `str` to the binary output archive by saving its size,
+// then its data.
 void Save(BinaryOutputArchive& oa, const std::string& str) {
   oa(str.size());
   oa.SaveToBinary(str.data(), sizeof(str));
 }
 
+// Read a string from the given binary input archive into str.
 void Load(BinaryInputArchive& ia, std::string& str) {
   // Read in size of string.
   uint64_t size;
