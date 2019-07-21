@@ -13,16 +13,17 @@
 #include "../binary_input.hpp"
 
 namespace draft {
+namespace binary {
 
 // Save the string `str` to the binary output archive by saving its size,
 // then its data.
-void Save(BinaryOutputArchive& oa, const std::string& str) {
+void Save(OutputArchive& oa, const std::string& str) {
   oa(str.size());
   oa.SaveToBinary(str.data(), sizeof(str));
 }
 
 // Read a string from the given binary input archive into str.
-void Load(BinaryInputArchive& ia, std::string& str) {
+void Load(binary::InputArchive& ia, std::string& str) {
   // Read in size of string.
   uint64_t size;
   ia(size);
@@ -34,6 +35,7 @@ void Load(BinaryInputArchive& ia, std::string& str) {
   ia.LoadBinary(str.data(), size);
 }
 
+}  // namespace binary
 }  // namespace draft
 
 #endif  // STRING_HPP_

@@ -5,10 +5,11 @@
 #include <memory>
 
 namespace draft {
+namespace binary {
 
-class BinaryInputArchive {
+class InputArchive {
  public:
-  explicit BinaryInputArchive(std::istream& istrm) : istrm_(istrm) {}
+  explicit InputArchive(std::istream& istrm) : istrm_(istrm) {}
 
   // Overload the function call operator. This allows clients to
   // pass an arbitrary number of parameters to be populated with
@@ -42,10 +43,11 @@ class BinaryInputArchive {
 // Deserialze arithmetic types.
 template<typename T>
 typename std::enable_if<std::is_arithmetic<T>::value>::type
-Load(const BinaryInputArchive& ia, T& t) {
+Load(const InputArchive& ia, T& t) {
   ia.LoadBinary(std::addressof(t), sizeof(t));
 }
 
+}  // namespace binary
 }  // namespace draft
 
 #endif  // INCLUDE_BINARY_INPUT_HPP_

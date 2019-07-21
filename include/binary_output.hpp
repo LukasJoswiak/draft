@@ -5,14 +5,15 @@
 #include <memory>
 
 namespace draft {
+namespace binary {
 
-class BinaryOutputArchive {
+class OutputArchive {
  public:
-  explicit BinaryOutputArchive(std::ostream& ostrm) : ostrm_(ostrm) {}
+  explicit OutputArchive(std::ostream& ostrm) : ostrm_(ostrm) {}
 
   // Overload the function call operator. This allows clients to use instances
   // of this class as a function. For example:
-  //   draft::BinaryOutputArchive oa(<some output stream>);
+  //   draft::binary::OutputArchive oa(<some output stream>);
   //   oa("hello", 32);
   //
   // It's important to accept rvalue references to maximize flexibility.
@@ -51,10 +52,11 @@ class BinaryOutputArchive {
 // passes the is_arithmetic check, i.e. T is an int or float.
 template<typename T>
 typename std::enable_if<std::is_arithmetic<T>::value>::type
-Save(const BinaryOutputArchive& oa, const T& t) {
+Save(const OutputArchive& oa, const T& t) {
   oa.SaveToBinary(std::addressof(t), sizeof(t));
 }
 
+}  // namespace binary
 }  // namespace draft
 
 #endif  // INCLUDE_BINARY_OUTPUT_HPP_

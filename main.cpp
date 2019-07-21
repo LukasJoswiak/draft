@@ -6,7 +6,7 @@
 int main() {
   {
     std::ofstream stream("out", std::ios::binary);
-    draft::BinaryOutputArchive oa(stream);
+    draft::binary::OutputArchive oa(stream);
 
     std::string str("hello");
     oa(32, str);
@@ -17,7 +17,7 @@ int main() {
 
   {
     std::ifstream stream("out", std::ios::binary);
-    draft::BinaryInputArchive ia(stream);
+    draft::binary::InputArchive ia(stream);
 
     int x;
     std::string str;
