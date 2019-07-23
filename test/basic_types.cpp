@@ -27,7 +27,7 @@ TEST_CASE("basic types can be serialized") {
     REQUIRE(y == 2147483647);
   }
 
-  SECTION("encode INT_MAX") {
+  SECTION("encode floating point value") {
     double x = 3.14;
     oa(x);
     double y;
