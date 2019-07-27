@@ -1,11 +1,11 @@
 all: draft
 
 draft:
-	g++ -std=c++17 -I . main.cpp
+	g++ -std=c++17 -I . Distance.cpp main.cpp
 
 test: obj/test/main.o
-	g++ -std=c++17 -I . -c test/basic_types.cpp -o obj/test/basic_types.o
-	g++ obj/test/main.o obj/test/basic_types.o -o bin/tests
+	g++ -std=c++17 -I . -c test/tests.cpp -o obj/test/tests.o
+	g++ obj/test/main.o obj/test/tests.o -o bin/tests
 
 obj/test/main.o:
 	# TODO: Move `mkdir` command to separate rule
