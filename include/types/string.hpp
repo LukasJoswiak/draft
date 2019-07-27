@@ -6,8 +6,8 @@
 // guaranteed to be large enough to represent the size of any object.
 // On most systems this will be 8 bytes.
 
-#ifndef STRING_HPP_
-#define STRING_HPP_
+#ifndef INCLUDE_STRING_HPP_
+#define INCLUDE_STRING_HPP_
 
 #include "../binary_output.hpp"
 #include "../binary_input.hpp"
@@ -38,4 +38,4 @@ void Load(binary::InputArchive& ia, std::string& str) {
 }  // namespace binary
 }  // namespace draft
 
-#endif  // STRING_HPP_
+#endif  // INCLUDE_STRING_HPP_

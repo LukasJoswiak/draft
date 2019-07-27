@@ -47,6 +47,13 @@ Load(const InputArchive& ia, T& t) {
   ia.LoadBinary(std::addressof(t), sizeof(t));
 }
 
+// Deserialize class types.
+template<typename T>
+typename std::enable_if<std::is_class<T>::value>::type
+Load(const InputArchive& ia, T& t) {
+  ia.LoadBinary(std::addressof(t), sizeof(t));
+}
+
 }  // namespace binary
 }  // namespace draft
 

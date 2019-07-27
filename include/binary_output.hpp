@@ -7,33 +7,6 @@
 namespace draft {
 namespace binary {
 
-// TODO: Move HasSerialize to separate class
-
-// Class to determine if generic `T` has a Serialize member function
-// with matching return type and parameters defined in `call_serialize`.
-template<typename T>
-class HasSerialize {
-  // Returns true if type `U` has function matching return type and
-  // parameters defined here.
-  template<typename U>
-  static bool call_serialize(void (U::*) () const);
-
-  // Returns true if type `U` has member function `Serialize` matching
-  // function definition defined above.
-  template<typename U>
-  static std::true_type has_serialize(decltype(call_serialize(&U::Serialize)));
-
-  // Catch all function. For any type of parameter which is not matched
-  // above, this function will be called, which will always return false.
-  template<typename U>
-  static std::false_type has_serialize(...);
-
- public:
-  // Test whether generic type `T` has Serialize function and store
-  // result in `value`.
-  static constexpr bool value = decltype(has_serialize<T>(nullptr)){};
-};
-
 class OutputArchive {
  public:
   explicit OutputArchive(std::ostream& ostrm) : ostrm_(ostrm) {}
@@ -76,22 +49,19 @@ class OutputArchive {
 };
 
 // The compiler will generate a function with the appropriate type if T
-// passes the is_arithmetic check, i.e. T is an int or float.
+// passes the `is_arithmetic` check, i.e. T is an int or float.
 template<typename T>
 typename std::enable_if<std::is_arithmetic<T>::value>::type
-Save(const OutputArchive& oa, const T& t) {
+Save(OutputArchive& oa, T& t) {
   oa.SaveToBinary(std::addressof(t), sizeof(t));
 }
 
-// TODO: Compiler error is unhelpful when trying to pass an object
-// with no `Serialize` function to the output archive. Improve error.
-
-// Overload `Save` for types which implement a `Serialize` function
-// as defined in `HasSerialize`.
+// Overload `Save` for class types (which should implement a `Serialize`
+// function which determines the class members to use for serialization).
 template<typename T>
-typename std::enable_if<HasSerialize<T>::value>::type
-Save(const OutputArchive& oa, const T& t) {
-  t.Serialize();
+typename std::enable_if<std::is_class<T>::value>::type
+Save(OutputArchive& oa, T& t) {
+  t.Serialize(oa);
 }
 
 }  // namespace binary
