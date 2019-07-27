@@ -19,7 +19,7 @@ namespace binary {
 // then its data.
 void Save(OutputArchive& oa, std::string& str) {
   oa(str.size());
-  oa.SaveToBinary(str.data(), sizeof(str));
+  oa.SaveToBinary(str.data(), str.size());
 }
 
 // Read a string from the given binary input archive into str.
