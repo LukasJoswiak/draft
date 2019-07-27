@@ -24,4 +24,4 @@ Alternatively, download the [single include header](https://github.com/catchorg/
 
 Unit tests are written to test the serialization / deserialization process. If a type can be serialized and deserialized and return the same result, the test is assumed to be successful.
 
-As different types gain serialization support, tests will be added.
+The file `tests.cpp` `include`s each test file and only this file is compiled instead of compiling each test file separately. This is not ideal because it means any time a test is changed the entire test suite has to be recompiled. However, because draft is a header-only library, compiling each test separately means the object files cannot be linked -- the linker would find multiple definitions of each symbol defined in draft when linking each tests object file.
