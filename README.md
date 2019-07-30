@@ -8,6 +8,13 @@ Download the project and include `include/draft.hpp` in the file you want to add
 
 ## Usage
 
+*Draft is in early stage development and currently only supports serialization of:*
+
+* `int`
+* `double`
+* `std::string`
+* classes containing any of the above
+
 ### Serialization
 
 Create an `OutputArchive` object with an output stream and pass the objects you want to serialize to it.
