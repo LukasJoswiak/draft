@@ -9,7 +9,13 @@ namespace binary {
 
 class InputArchive {
  public:
-  explicit InputArchive(std::istream& istrm) : istrm_(istrm) {}
+  explicit InputArchive(std::istream& istrm) : istrm_(istrm) {
+    // Make sure serialized data was written correctly by checking
+    // the magic number written to the first four bytes.
+    int magic_number;
+    LoadBinary(std::addressof(magic_number), sizeof(magic_number));
+    assert(magic_number == 0xabbaface && "Could not read serialized file");
+  }
 
   // Overload the function call operator. This allows clients to
   // pass an arbitrary number of parameters to be populated with

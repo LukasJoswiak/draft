@@ -9,7 +9,7 @@ class Point {
   Point(int x, int y) : x_(x), y_(y) {}
 
   template<typename Archive>
-  void Serialize(Archive& ar) const {
+  void Serialize(Archive& ar) {
     ar(x_, y_);
   }
 

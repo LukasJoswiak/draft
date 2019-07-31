@@ -9,7 +9,12 @@ namespace binary {
 
 class OutputArchive {
  public:
-  explicit OutputArchive(std::ostream& ostrm) : ostrm_(ostrm) {}
+  explicit OutputArchive(std::ostream& ostrm) : ostrm_(ostrm) {
+    // Write a unique value to the first four bytes of the output. This
+    // is used to ensure compatibility when reading data for deserialization.
+    const int magic_number = 0xabbaface;
+    SaveToBinary(&magic_number, sizeof(magic_number));
+  }
 
   // Overload the function call operator. This allows clients to use instances
   // of this class as a function. For example:
