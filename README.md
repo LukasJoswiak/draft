@@ -10,7 +10,10 @@ Download the project and include `include/draft.hpp` in the file you want to add
 
 *Draft is in early stage development and currently only supports serialization of:*
 
+* `bool`
+* `char`
 * `int`
+* `float`
 * `double`
 * `std::string`
 * classes containing any of the above
