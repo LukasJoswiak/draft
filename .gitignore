@@ -1,6 +1,15 @@
-# Vim
+# Compiled objects
+*.o
+*.ob
+obj/
+
+# Executables
+*.out
+bin/
+
+# Editor files
 *.swp
 *.swo
 
-a.out
-binary
+# Ctags
+tags
