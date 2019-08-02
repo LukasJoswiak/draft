@@ -8,6 +8,17 @@ TEST_CASE("strings can be serialized") {
   draft::binary::OutputArchive oa(ss);
   draft::binary::InputArchive ia(ss);
 
+  // Potential edge case with a zero length string.
+  SECTION("encode empty string") {
+    std::string str("");
+    oa(str);
+    std::string res;
+    ia(res);
+
+    REQUIRE(res == "");
+    REQUIRE(res.length() == 0);
+  }
+
   // Short strings use SSO to avoid using the heap for storage.
   // Make sure this optimization does not affect serialization.
   SECTION("encode short string") {
