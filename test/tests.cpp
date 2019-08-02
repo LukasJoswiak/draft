@@ -5,5 +5,6 @@
 // This is not a great solution, because each time any test is changed,
 // all tests have to be recompiled, but it is an OK solution for now.
 #include "basic_types.hpp"
-#include "string.hpp"
 #include "basic_class.hpp"
+#include "string.hpp"
+#include "pair.hpp"
