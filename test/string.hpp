@@ -40,6 +40,15 @@ TEST_CASE("strings can be serialized") {
     REQUIRE(res == alphabet);
   }
 
+  SECTION("encode Unicode string") {
+    std::string str("µ");
+    oa(str);
+    std::string res;
+    ia(res);
+
+    REQUIRE(res == "µ");
+  }
+
   // TODO: Add tests for other string types in the future (when
   // std::basic_string is supported)
 }
