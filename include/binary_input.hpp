@@ -20,8 +20,8 @@ class InputArchive {
   // Overload the function call operator. This allows clients to
   // pass an arbitrary number of parameters to be populated with
   // data based on the archived data.
-  template<typename... ArgTypes>
-  void operator()(ArgTypes&&... args) {
+  template<typename... Types>
+  void operator()(Types&&... args) {
     Process(args...);
   }
 
@@ -37,8 +37,8 @@ class InputArchive {
     Load(*this, first);
   }
 
-  template<typename T, typename... ArgTypes>
-  void Process(T&& first, ArgTypes&&... rest) {
+  template<typename T, typename... Types>
+  void Process(T&& first, Types&&... rest) {
     Process(first);
     Process(rest...);
   }

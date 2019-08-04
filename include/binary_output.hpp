@@ -25,8 +25,8 @@ class OutputArchive {
   // This allows calls of the format:
   //   std::string str("hello");
   //   oa(str.size());
-  template<typename T, typename... ArgTypes>
-  void operator()(T&& t, ArgTypes&&... args) {
+  template<typename T, typename... Types>
+  void operator()(T&& t, Types&&... args) {
     Process(t, args...);
   }
 
@@ -44,8 +44,8 @@ class OutputArchive {
 
   // Use variadic templates to accept an arbitrary number of arguments. This
   // allows the user to pass any number of elements to be serialized.
-  template<typename T, typename... ArgTypes>
-  void Process(T&& first, ArgTypes&... rest) {
+  template<typename T, typename... Types>
+  void Process(T&& first, Types&... rest) {
     Process(first);
     Process(rest...);
   }
