@@ -32,7 +32,7 @@ void Load(binary::InputArchive& ia, std::string& str) {
   str.resize(size);
 
   // Read in string.
-  ia.LoadBinary(str.data(), size);
+  ia.LoadBinary((void*) str.data(), size);
 }
 
 }  // namespace binary

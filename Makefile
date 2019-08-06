@@ -1,7 +1,7 @@
 all: draft
 
 draft:
-	g++ -std=c++17 -I . main.cpp
+	g++ -std=c++11 -I . main.cpp
 
 test: obj/test/main.o
 	g++ -std=c++17 -I . -c test/tests.cpp -o obj/test/tests.o
