@@ -5,5 +5,6 @@
 #include "binary_input.hpp"
 #include "types/string.hpp"
 #include "types/pair.hpp"
+#include "types/tuple.hpp"
 
 #endif  // INCLUDE_DRAFT_HPP_
