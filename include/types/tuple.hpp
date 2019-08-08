@@ -65,10 +65,10 @@ void Save(OutputArchive&oa, std::tuple<Types...>& tuple) {
   tuple_for_each(tuple, TupleFunctor(), oa);
 }
 
-// TODO: comment
+// Load the tuple by passing each element to the input archive.
 template<typename... Types>
 void Load(binary::InputArchive& ia, std::tuple<Types...>& tuple) {
-  // TODO: implement
+  tuple_for_each(tuple, TupleFunctor(), ia);
 }
 
 }  // namespace binary
