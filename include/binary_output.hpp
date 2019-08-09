@@ -21,13 +21,17 @@ class OutputArchive {
   //   draft::binary::OutputArchive oa(<some output stream>);
   //   oa("hello", 32);
   //
-  // It's important to accept rvalue references to maximize flexibility.
-  // This allows calls of the format:
-  //   std::string str("hello");
-  //   oa(str.size());
+  // t can be either an lvalue reference or an rvalue reference, depending
+  // on what is passed in to the functor. This is important because it allows
+  // serialization of both lvalues and rvalues.
+  //
+  // To maintain the reference type of t when passing it to the next function,
+  // std::forward is used. Inside this function, t is an lvalue reference,
+  // and passing it to the next function without std::forward means the next
+  // function would only be able to accept an lvalue.
   template<typename T, typename... Types>
   void operator()(T&& t, Types&&... args) {
-    Process(t, args...);
+    Process(std::forward<T>(t), args...);
   }
 
   // Write the given data to the output stream.
@@ -46,8 +50,8 @@ class OutputArchive {
   // allows the user to pass any number of elements to be serialized.
   template<typename T, typename... Types>
   void Process(T&& first, Types&... rest) {
-    Process(first);
-    Process(rest...);
+    Process(std::forward<T>(first));
+    Process(std::forward<Types>(rest)...);
   }
 
   std::ostream& ostrm_;
@@ -57,7 +61,7 @@ class OutputArchive {
 // passes the `is_arithmetic` check, i.e. T is an int or float.
 template<typename T>
 typename std::enable_if<std::is_arithmetic<T>::value>::type
-Save(OutputArchive& oa, T& t) {
+Save(OutputArchive& oa, const T& t) {
   oa.SaveToBinary(std::addressof(t), sizeof(t));
 }
 
@@ -65,7 +69,7 @@ Save(OutputArchive& oa, T& t) {
 // function which determines the class members to use for serialization).
 template<typename T>
 typename std::enable_if<std::is_class<T>::value>::type
-Save(OutputArchive& oa, T& t) {
+Save(OutputArchive& oa, const T& t) {
   t.Serialize(oa);
 }
 

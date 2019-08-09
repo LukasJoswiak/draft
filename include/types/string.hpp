@@ -17,7 +17,7 @@ namespace binary {
 
 // Save the string `str` to the binary output archive by saving its size,
 // then its data.
-void Save(OutputArchive& oa, std::string& str) {
+void Save(OutputArchive& oa, const std::string& str) {
   oa(str.size());
   oa.SaveToBinary(str.data(), str.size());
 }
