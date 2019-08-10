@@ -1,4 +1,11 @@
-// TODO: comment
+// std::tuple is more complicated to encode than std::pair, because std::tuple
+// can contain an arbitrary number of elements of arbitrary types. Fortunately,
+// these types are all known to us at compile time, meaning we can ensure each
+// type in the tuple is serializable. The code in the anonymous namespace at
+// the top of this class is used to unpack a tuple and call a function (the
+// archive/unarchive function) on each of its elements. Thanks to this
+// StackOverflow answer for details on how to unpack a tuple:
+//  * https://stackoverflow.com/a/16387374/986991
 
 #ifndef INCLUDE_TUPLE_HPP_
 #define INCLUDE_TUPLE_HPP_
@@ -37,18 +44,19 @@ void for_each(T&& t, F f, Archive& oa, sequence<Nums...>) {
 // Using this sequence, calls a helper function to look at each element in
 // the tuple.
 template<typename... Types, typename F, typename Archive>
-void tuple_for_each(const std::tuple<Types...>& t, F f, Archive& oa) {
+void tuple_for_each(std::tuple<Types...>& t, F f, Archive& oa) {
   for_each(t, f, oa, generate_sequence<sizeof...(Types)>());
 }
 
 // Class used as a wrapper to handle operations on individual elements
 // of a tuple.
 struct TupleFunctor {
-  // Overload the function call operator to handle serialization of
-  // individual elements of a tuple.
+  // Overload the function call operator to handle serialization and
+  // deserialization (the Archive type is generic) of individual elements
+  // of a tuple.
   template<typename Archive, typename T>
-  void operator()(Archive& oa, T&& t) {
-    oa(t);
+  void operator()(Archive& ar, T&& t) {
+    ar(t);
   }
 };
 }

@@ -20,8 +20,12 @@ class InputArchive {
   // Overload the function call operator. This allows clients to
   // pass an arbitrary number of parameters to be populated with
   // data based on the archived data.
+  // Unlike the output class, the input class does not accept rvalues.
+  // It does not make sense to accept rvalues because there is no
+  // mechanism to give the deserialized data back to the caller if the
+  // passed in object is an rvalue.
   template<typename... Types>
-  void operator()(Types&&... args) {
+  void operator()(Types&... args) {
     Process(args...);
   }
 
@@ -33,12 +37,12 @@ class InputArchive {
 
  private:
   template<typename T>
-  void Process(T&& first) {
+  void Process(T& first) {
     Load(*this, first);
   }
 
   template<typename T, typename... Types>
-  void Process(T&& first, Types&&... rest) {
+  void Process(T& first, Types&... rest) {
     Process(first);
     Process(rest...);
   }

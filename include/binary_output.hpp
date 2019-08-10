@@ -49,7 +49,7 @@ class OutputArchive {
   // Use variadic templates to accept an arbitrary number of arguments. This
   // allows the user to pass any number of elements to be serialized.
   template<typename T, typename... Types>
-  void Process(T&& first, Types&... rest) {
+  void Process(T&& first, Types&&... rest) {
     Process(std::forward<T>(first));
     Process(std::forward<Types>(rest)...);
   }
