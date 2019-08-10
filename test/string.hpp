@@ -40,6 +40,15 @@ TEST_CASE("strings can be serialized") {
     REQUIRE(res == alphabet);
   }
 
+  // Make sure rvalue strings can be encoded.
+  SECTION("encode temporary string") {
+    oa("hello");
+    std::string res;
+    ia(res);
+
+    REQUIRE(res == "hello");
+  }
+
   SECTION("encode Unicode string") {
     std::string str("µ");
     oa(str);
