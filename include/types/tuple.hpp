@@ -36,6 +36,8 @@ struct generate_sequence<0, Nums...> : sequence<Nums...> {};
 template<typename T, typename F, typename Archive, std::size_t... Nums>
 void for_each(T&& t, F f, Archive& oa, sequence<Nums...>) {
   auto _ = { (f(oa, std::get<Nums>(t)), 0)... };
+  // "Use" the variable to avoid unused variable warnings from the compiler.
+  (void) _;
 }
 
 // Accepts a tuple with an arbitrary number of values, an instance of a

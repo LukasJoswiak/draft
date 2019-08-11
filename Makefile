@@ -1,16 +1,25 @@
+# This Makefile provides targets to build the unit tests for draft. It also
+# provides a target to create simple tests from a file main.cpp. If you are
+# using draft in your project, you will not need this Makefile. Instead,
+# include the draft header and you should be set.
+
+CC = g++
+CFLAGS = -Wall -g -std=c++11 -I .
+
 all: draft
 
 draft:
-	g++ -std=c++11 -I . main.cpp
+	$(CC) $(CFLAGS) main.cpp
 
 test: obj/test/main.o
-	g++ -std=c++17 -I . -c test/tests.cpp -o obj/test/tests.o
-	g++ obj/test/main.o obj/test/tests.o -o bin/tests
+	$(CC) $(CFLAGS) -c test/tests.cpp -o obj/test/tests.o
+	$(CC) $< obj/test/tests.o -o bin/tests
 
-obj/test/main.o:
-	# TODO: Move `mkdir` command to separate rule
+obj/test/main.o: | obj bin
+	$(CC) $(CFLAGS) -c test/main.cpp -o $@
+
+obj bin:
 	mkdir -p bin obj obj/test
-	g++ -std=c++17 -I . -c test/main.cpp -o $@
 
 clean:
 	rm -rf bin obj
