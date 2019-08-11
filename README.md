@@ -17,6 +17,7 @@ Download the project and include `include/draft.hpp` in the file you want to add
 * `double`
 * `std::string`
 * `std::pair`
+* `std::tuple`
 * classes containing any of the above
 
 ### Serialization
