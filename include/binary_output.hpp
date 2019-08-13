@@ -73,6 +73,14 @@ Save(OutputArchive& oa, const T& t) {
   t.Serialize(oa);
 }
 
+// Disable support for serialization of pointers. Pointers cannot be reliably
+// deserialized because not all sections of memory are writable.
+template<typename T>
+typename std::enable_if<std::is_pointer<T>::value>::type
+Save(OutputArchive& oa, const T& t) {
+  static_assert(false, "draft does not support serialization of raw pointers");
+}
+
 }  // namespace binary
 }  // namespace draft
 
