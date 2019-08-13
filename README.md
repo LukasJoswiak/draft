@@ -111,3 +111,9 @@ int main() {
   return 0;
 }
 ```
+
+## FAQ
+
+### Why doesn't draft support serialization of raw pointers?
+
+Raw pointers can point anywhere in memory. They can point to variables on the stack, the heap, or to read-only portions of memory such as where string literals are commonly stored. If raw pointers were serializable, memory would have to be allocated during the deserialization process to store the data pointed to by the pointer. This is not possible for all areas in memory. For data on the stack and heap, draft would likely write to different addresses than those used in the serialization process, losing determinism. In order to serialize pointers, use smart pointers.
