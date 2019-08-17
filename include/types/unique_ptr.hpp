@@ -13,13 +13,23 @@ namespace binary {
 
 // Save the unique pointer by writing the managed element to the output stream.
 template<typename T>
-void Save(OutputArchive&oa, std::unique_ptr<T>& ptr) {
+typename std::enable_if<!std::is_array<T>::value>::type
+Save(OutputArchive&oa, std::unique_ptr<T>& ptr) {
   oa(*ptr);
+}
+
+// Disable support for serializing a unique pointer to an array.
+template<typename T>
+typename std::enable_if<std::is_array<T>::value>::type
+Save(OutputArchive&oa, std::unique_ptr<T>& ptr) {
+  static_assert(!std::is_array<T>::value,
+      "draft does not support serialization of raw arrays (use std::array)");
 }
 
 // Read the serialized element and give it to the smart pointer to manage.
 template<typename T>
-void Load(binary::InputArchive& ia, std::unique_ptr<T>& ptr) {
+typename std::enable_if<!std::is_array<T>::value>::type
+Load(binary::InputArchive& ia, std::unique_ptr<T>& ptr) {
   T t;
   ia(t);
   ptr.reset(new T(t));

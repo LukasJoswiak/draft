@@ -80,7 +80,8 @@ typename std::enable_if<std::is_pointer<T>::value>::type
 Save(OutputArchive& oa, const T& t) {
   // Check at compile time that T is not a pointer. This check will always
   // fail, because this function only gets called when T is a pointer.
-  static_assert(!std::is_pointer<T>::value, "draft does not support serialization of raw pointers");
+  static_assert(!std::is_pointer<T>::value,
+      "draft does not support serialization of raw pointers");
 }
 
 }  // namespace binary
