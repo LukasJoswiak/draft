@@ -9,3 +9,4 @@
 #include "string.hpp"
 #include "pair.hpp"
 #include "tuple.hpp"
+#include "unique_ptr.hpp"
