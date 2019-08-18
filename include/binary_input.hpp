@@ -64,6 +64,15 @@ Load(const InputArchive& ia, T& t) {
   ia.LoadBinary((void*) std::addressof(t), sizeof(t));
 }
 
+// To deserialize arrays, deserialize each element individually.
+template<typename T>
+typename std::enable_if<std::is_array<T>::value>::type
+Load(InputArchive& ia, T& t) {
+  for (const auto& val : t) {
+    ia(val);
+  }
+}
+
 }  // namespace binary
 }  // namespace draft
 

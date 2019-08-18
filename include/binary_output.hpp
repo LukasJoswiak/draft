@@ -73,6 +73,15 @@ Save(OutputArchive& oa, const T& t) {
   t.Serialize(oa);
 }
 
+// To serialize arrays, serialize each element individually.
+template<typename T>
+typename std::enable_if<std::is_array<T>::value>::type
+Save(OutputArchive& oa, const T& t) {
+  for (const auto& val : t) {
+    oa(val);
+  }
+}
+
 // Disable support for serialization of pointers. Pointers cannot be reliably
 // deserialized because not all sections of memory are writable.
 template<typename T>
