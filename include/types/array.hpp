@@ -16,18 +16,14 @@ namespace binary {
 // Serialize the array by encoding each element individually.
 template<typename T, std::size_t N>
 void Save(OutputArchive&oa, std::array<T, N>& array) {
-  for (const auto& val : array) {
-    oa(val);
-  }
+  std::for_each(array.begin(), array.end(), oa);
 }
 
 // Load the array from the given binary input archive by reading elements
 // and storing them one at a time in `array`.
 template<typename T, std::size_t N>
 void Load(binary::InputArchive& ia, std::array<T, N>& array) {
-  for (const auto& val : array) {
-    ia(val);
-  }
+  std::for_each(array.begin(), array.end(), ia);
 }
 
 }  // namespace binary

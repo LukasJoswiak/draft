@@ -18,7 +18,7 @@ Save(OutputArchive&oa, std::unique_ptr<T>& ptr) {
   oa(*ptr);
 }
 
-// Disable support for serializing a unique pointer to an array.
+// Disable support for serializing a unique pointer of an array.
 template<typename T>
 typename std::enable_if<std::is_array<T>::value>::type
 Save(OutputArchive&oa, std::unique_ptr<T>& ptr) {

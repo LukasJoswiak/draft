@@ -16,6 +16,7 @@ Download the project and include `include/draft.hpp` in the file you want to add
 * `float`
 * `double`
 * `std::string`
+* `std::array`
 * `std::pair`
 * `std::tuple`
 * `std::unique_ptr`
