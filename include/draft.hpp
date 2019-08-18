@@ -4,6 +4,7 @@
 #include "binary_output.hpp"
 #include "binary_input.hpp"
 #include "types/string.hpp"
+#include "types/array.hpp"
 #include "types/pair.hpp"
 #include "types/tuple.hpp"
 #include "types/unique_ptr.hpp"
