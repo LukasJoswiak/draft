@@ -30,7 +30,7 @@ void Load(binary::InputArchive& ia, std::map<K, V>& map) {
   std::size_t size;
   ia(size);
 
-  for (int i = 0; i < size; ++i) {
+  for (std::size_t i = 0; i < size; ++i) {
     K key;
     V value;
     ia(key);
