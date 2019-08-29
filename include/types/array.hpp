@@ -5,6 +5,7 @@
 #ifndef INCLUDE_ARRAY_HPP_
 #define INCLUDE_ARRAY_HPP_
 
+#include <algorithm>
 #include <array>
 
 #include "../binary_output.hpp"

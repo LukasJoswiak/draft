@@ -1,6 +1,7 @@
 #ifndef INCLUDE_BINARY_INPUT_HPP_
 #define INCLUDE_BINARY_INPUT_HPP_
 
+#include <cassert>
 #include <fstream>
 #include <memory>
 
