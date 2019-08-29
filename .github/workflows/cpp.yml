@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: download catch2
+      run: wget https://raw.githubusercontent.com/catchorg/Catch2/master/single_include/catch2/catch.hpp -P catch2/
     - name: make test
       run: make test
     - name: run tests
