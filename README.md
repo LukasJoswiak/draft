@@ -1,5 +1,7 @@
 # draft
 
+[![build status](https://github.com/LukasJoswiak/draft/workflows/build/badge.svg)](https://github.com/LukasJoswiak/draft/actions)
+
 Draft is a C++ serialization library, heavily inspired by [Boost.Serialization](http://www.boost.org/libs/serialization) and [cereal](https://uscilab.github.io/cereal/).
 
 ## Installation
@@ -20,6 +22,7 @@ Download the project and include `include/draft.hpp` in the file you want to add
 * `std::pair`
 * `std::tuple`
 * `std::map`
+* `std::unordered_map`
 * `std::unique_ptr`
 * classes containing any of the above
 
