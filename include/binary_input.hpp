@@ -13,7 +13,7 @@ class InputArchive {
   explicit InputArchive(std::istream& istrm) : istrm_(istrm) {
     // Make sure serialized data was written correctly by checking
     // the magic number written to the first four bytes.
-    int magic_number;
+    uint32_t magic_number;
     LoadBinary(std::addressof(magic_number), sizeof(magic_number));
     assert(magic_number == 0xabbaface && "Could not read serialized file");
   }
