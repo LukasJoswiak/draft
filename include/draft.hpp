@@ -7,6 +7,7 @@
 #include "types/array.hpp"
 #include "types/pair.hpp"
 #include "types/tuple.hpp"
+#include "types/deque.hpp"
 #include "types/map.hpp"
 #include "types/unordered_map.hpp"
 #include "types/unique_ptr.hpp"
