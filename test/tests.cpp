@@ -9,6 +9,7 @@
 #include "string.hpp"
 #include "pair.hpp"
 #include "tuple.hpp"
+#include "deque.hpp"
 #include "map.hpp"
 #include "unordered_map.hpp"
 #include "unique_ptr.hpp"
