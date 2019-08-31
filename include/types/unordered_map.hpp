@@ -13,8 +13,16 @@ namespace binary {
 
 // Serialize the unordered_map by writing the number of elements it holds,
 // then writing each key-value pair in order.
-template<typename K, typename V>
-void Save(OutputArchive& oa, const std::unordered_map<K, V>& map) {
+template<
+  typename K,
+  typename V,
+  typename Hash,
+  typename KeyEqual,
+  typename Allocator
+>
+void
+Save(OutputArchive& oa,
+    const std::unordered_map<K, V, Hash, KeyEqual, Allocator>& map) {
   oa(map.size());
   for (const auto& kv : map) {
     oa(kv.first);
@@ -24,8 +32,16 @@ void Save(OutputArchive& oa, const std::unordered_map<K, V>& map) {
 
 // Deserialize the unordered_map by reading the number of elements stored,
 // then reading each key-value pair.
-template<typename K, typename V>
-void Load(binary::InputArchive& ia, std::unordered_map<K, V>& map) {
+template<
+  typename K,
+  typename V,
+  typename Hash,
+  typename KeyEqual,
+  typename Allocator
+>
+void
+Load(binary::InputArchive& ia,
+    std::unordered_map<K, V, Hash, KeyEqual, Allocator>& map) {
   // Read in size of map.
   std::size_t size;
   ia(size);
