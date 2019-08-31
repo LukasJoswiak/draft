@@ -9,6 +9,8 @@
 #ifndef INCLUDE_STRING_HPP_
 #define INCLUDE_STRING_HPP_
 
+#include <string>
+
 #include "../binary_output.hpp"
 #include "../binary_input.hpp"
 
@@ -17,13 +19,19 @@ namespace binary {
 
 // Save the string `str` to the binary output archive by saving its size,
 // then its data.
-void Save(OutputArchive& oa, const std::string& str) {
+template<typename CharT, typename Traits, typename Allocator>
+void
+Save(OutputArchive& oa,
+    const std::basic_string<CharT, Traits, Allocator>& str) {
   oa(str.size());
   oa.SaveToBinary(str.data(), str.size());
 }
 
 // Read a string from the given binary input archive into str.
-void Load(binary::InputArchive& ia, std::string& str) {
+template<typename CharT, typename Traits, typename Allocator>
+void
+Load(binary::InputArchive& ia,
+    std::basic_string<CharT, Traits, Allocator>& str) {
   // Read in size of string.
   uint64_t size;
   ia(size);
