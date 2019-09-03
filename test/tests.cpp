@@ -10,6 +10,7 @@
 #include "pair.hpp"
 #include "tuple.hpp"
 #include "deque.hpp"
+#include "queue.hpp"
 #include "map.hpp"
 #include "unordered_map.hpp"
 #include "unique_ptr.hpp"
