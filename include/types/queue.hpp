@@ -12,18 +12,34 @@
 namespace draft {
 namespace binary {
 
-// Serialize the queue by encoding its underlying container. Container must be
-// a serializable type. Access to the underlying container is protected, so the
-// following is done to get around the protected member object issue.
-template<typename T, typename Container>
-void Save(OutputArchive& oa, const std::queue<T, Container>& queue) {
-  // TODO: implement (serialize queue.c)
+// Return a reference to the underlying container of the given std::queue.
+// See https://stackoverflow.com/a/29291621/986991 for an explanation of this
+// code.
+// TODO: Add inline explanatory comments.
+template<typename T, typename C>
+const C& UnderlyingContainer(const std::queue<T, C>& queue) {
+  struct QueueInternals : private std::queue<T, C> {
+    static const C& Container(const std::queue<T, C>& queue) {
+      return queue .* &QueueInternals::c;
+    }
+  };
+  return QueueInternals::Container(queue);
 }
 
-// TODO: comment
+// Serialize the queue by encoding its underlying container. Container must be
+// a serializable type.
+template<typename T, typename Container>
+void Save(OutputArchive& oa, const std::queue<T, Container>& queue) {
+  oa(UnderlyingContainer(queue));
+}
+
+// Deserialize the queue by decoding its data into the underlying container
+// type, then creating a new queue from the container data.
 template<typename T, typename Container>
 void Load(binary::InputArchive& ia, std::queue<T, Container>& queue) {
-  // TODO: implement
+  auto container = UnderlyingContainer(queue);
+  ia(container);
+  queue = std::queue<T, Container>(std::move(container));
 }
 
 }  // namespace binary

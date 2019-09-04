@@ -21,11 +21,11 @@ TEST_CASE("std::queue can be serialized") {
     REQUIRE(r.size() == 4);
     REQUIRE(r.front() == 1);
     r.pop();
-    REQUIRE(r.front() == 1);
+    REQUIRE(r.front() == 7);
     r.pop();
-    REQUIRE(r.front() == 1);
+    REQUIRE(r.front() == 6);
     r.pop();
-    REQUIRE(r.front() == 1);
+    REQUIRE(r.front() == 4);
   }
 
   SECTION("encode queue of objects") {
