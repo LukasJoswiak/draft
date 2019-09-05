@@ -70,7 +70,7 @@ Save(OutputArchive& oa, const T& t) {
 template<typename T>
 typename std::enable_if<std::is_class<T>::value>::type
 Save(OutputArchive& oa, const T& t) {
-  t.Serialize(oa);
+  const_cast<T&>(t).Serialize(oa);
 }
 
 // To serialize arrays, serialize each element individually.

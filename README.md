@@ -89,7 +89,7 @@ class Point {
   // the class is being serialized on deserialized, Archive will be an OutputArchive or an
   // InputArchive, both of which overload the function call operator.
   template<typename Archive>
-  void Serialize(Archive& ar) const {
+  void Serialize(Archive& ar) {
     ar(x_, y_);
   }
 

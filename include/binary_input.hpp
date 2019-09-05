@@ -61,8 +61,8 @@ Load(const InputArchive& ia, T& t) {
 // Deserialize class types.
 template<typename T>
 typename std::enable_if<std::is_class<T>::value>::type
-Load(const InputArchive& ia, T& t) {
-  ia.LoadBinary((void*) std::addressof(t), sizeof(t));
+Load(InputArchive& ia, T& t) {
+  t.Serialize(ia);
 }
 
 // To deserialize arrays, deserialize each element individually.
