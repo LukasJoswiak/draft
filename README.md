@@ -21,6 +21,7 @@ Download the project and include `include/draft.hpp` in the file you want to add
 * `std::array`
 * `std::pair`
 * `std::tuple`
+* `std::forward_list`
 * `std::map`
 * `std::deque`
 * `std::queue`
