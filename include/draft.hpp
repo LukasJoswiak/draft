@@ -7,6 +7,7 @@
 #include "types/array.hpp"
 #include "types/pair.hpp"
 #include "types/tuple.hpp"
+#include "types/list.hpp"
 #include "types/forward_list.hpp"
 #include "types/deque.hpp"
 #include "types/queue.hpp"

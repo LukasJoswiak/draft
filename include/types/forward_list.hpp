@@ -3,7 +3,6 @@
 #ifndef INCLUDE_FORWARD_LIST_HPP_
 #define INCLUDE_FORWARD_LIST_HPP_
 
-#include <algorithm>
 #include <forward_list>
 
 #include "../binary_output.hpp"
