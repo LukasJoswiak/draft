@@ -9,6 +9,7 @@
 #include "string.hpp"
 #include "pair.hpp"
 #include "tuple.hpp"
+#include "list.hpp"
 #include "forward_list.hpp"
 #include "deque.hpp"
 #include "queue.hpp"
