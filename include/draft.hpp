@@ -11,6 +11,7 @@
 #include "types/forward_list.hpp"
 #include "types/deque.hpp"
 #include "types/queue.hpp"
+#include "types/unordered_set.hpp"
 #include "types/map.hpp"
 #include "types/unordered_map.hpp"
 #include "types/unique_ptr.hpp"
