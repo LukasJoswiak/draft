@@ -23,9 +23,10 @@ Download the project and include `include/draft.hpp` in the file you want to add
 * `std::tuple`
 * `std::list`
 * `std::forward_list`
-* `std::map`
 * `std::deque`
 * `std::queue`
+* `std::unordered_set`
+* `std::map`
 * `std::unordered_map`
 * `std::unique_ptr`
 * classes containing any of the above

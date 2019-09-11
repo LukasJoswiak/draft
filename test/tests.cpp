@@ -13,6 +13,7 @@
 #include "forward_list.hpp"
 #include "deque.hpp"
 #include "queue.hpp"
+#include "unordered_set.hpp"
 #include "map.hpp"
 #include "unordered_map.hpp"
 #include "unique_ptr.hpp"
