@@ -26,6 +26,7 @@ Download the project and include `include/draft.hpp` in the file you want to add
 * `std::deque`
 * `std::queue`
 * `std::unordered_set`
+* `std::unordered_multiset`
 * `std::map`
 * `std::unordered_map`
 * `std::unique_ptr`
