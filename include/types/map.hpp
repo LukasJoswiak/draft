@@ -22,6 +22,17 @@ void Save(OutputArchive& oa, const std::map<K, V, Compare, Allocator>& map) {
   }
 }
 
+template<typename K, typename V, typename Compare, typename Allocator>
+void
+Save(OutputArchive& oa,
+    const std::multimap<K, V, Compare, Allocator>& map) {
+  oa(map.size());
+  for (const auto& kv : map) {
+    oa(kv.first);
+    oa(kv.second);
+  }
+}
+
 // Deserialize the map by reading the number of elements stored, then reading
 // each key-value pair.
 template<typename K, typename V, typename Compare, typename Allocator>
@@ -39,6 +50,23 @@ void Load(binary::InputArchive& ia, std::map<K, V, Compare, Allocator>& map) {
     // Let the map take control of `key` and `value` to avoid having to make
     // copies.
     // TODO: This can likely be improved by using emplace_hint instead.
+    map.emplace(std::move(key), std::move(value));
+  }
+}
+
+template<typename K, typename V, typename Compare, typename Allocator>
+void
+Load(binary::InputArchive& ia,
+    std::multimap<K, V, Compare, Allocator>& map) {
+  std::size_t size;
+  ia(size);
+
+  for (std::size_t i = 0; i < size; ++i) {
+    K key;
+    V value;
+    ia(key);
+    ia(value);
+
     map.emplace(std::move(key), std::move(value));
   }
 }
