@@ -29,6 +29,7 @@ Download the project and include `include/draft.hpp` in the file you want to add
 * `std::unordered_multiset`
 * `std::map`
 * `std::unordered_map`
+* `std::unordered_multimap`
 * `std::unique_ptr`
 * classes containing any of the above
 
